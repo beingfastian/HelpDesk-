@@ -1,0 +1,11 @@
+C:\Users\DELL\source\repos\CSV Search\CSV Search\bin\Debug\CSV Search.exe.config
+C:\Users\DELL\source\repos\CSV Search\CSV Search\bin\Debug\CSV Search.exe
+C:\Users\DELL\source\repos\CSV Search\CSV Search\bin\Debug\CSV Search.pdb
+C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV_Search.Form1.resources
+C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV_Search.Properties.Resources.resources
+C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.csproj.GenerateResource.cache
+C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.exe
+C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.pdb
+C:\Users\DELL\source\repos\CSV Search\CSV Search\bin\Debug\data.csv.csv.csv

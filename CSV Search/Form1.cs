@@ -14,11 +14,7 @@ namespace CSV_Search
 {
     public partial class Form1 : Form
     {
-
-          //private string csvFilePath = "Plugins.csv";
-         private string csvFilePath = "data.csv.csv.csv";
-        //private string csvFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "כרטיס.csv");
-        private bool isLabel3Clicked = false;
+        private string csvFilePath = Path.Combine(Application.StartupPath, "CSVFiles", "default.csv");
         private List<PersonRecord> records = new List<PersonRecord>();
 
         public Form1()
@@ -31,7 +27,7 @@ namespace CSV_Search
             textBox1.ForeColor = Color.Black;
             textBox1.Font = new Font("Arial", 12);
 
-            textBox2.BackColor = Color.White; // Add settings for textBox2
+            textBox2.BackColor = Color.White; 
             textBox2.ForeColor = Color.Black;
             textBox2.Font = new Font("Arial", 12);
 
@@ -47,11 +43,7 @@ namespace CSV_Search
 
         }
 
-        //private void CenterControl(Control control)
-        //{
-        //    control.Left = (this.ClientSize.Width - control.Width) / 2;
-        //    control.Top = (this.ClientSize.Height - control.Height) / 2;
-        //}
+        
 
 
         private void label1_Paint(object sender, PaintEventArgs e)
@@ -79,20 +71,20 @@ namespace CSV_Search
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            int radius = 15; // Adjust corner roundness
+            int radius = 15; 
             int borderWidth = 2;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (Pen pen = new Pen(Color.Gray, borderWidth)) // Border color
+            using (Pen pen = new Pen(Color.Gray, borderWidth)) 
             {
-                // Draw rounded rectangle for textBox1
+                
                 using (GraphicsPath path1 = GetRoundedRectanglePath(textBox1.Bounds, radius))
                 {
                     g.DrawPath(pen, path1);
                 }
 
-                // Draw rounded rectangle for textBox2
+                
                 using (GraphicsPath path2 = GetRoundedRectanglePath(textBox2.Bounds, radius))
                 {
                     g.DrawPath(pen, path2);
@@ -143,36 +135,42 @@ namespace CSV_Search
 
         private void LoadCsvData()
         {
-            records.Clear(); // Purana data delete karo
+            records.Clear();
 
             if (!File.Exists(csvFilePath))
             {
-                MessageBox.Show("CSV file not found!");
+                // Don't show error message on initial load, just return
+                // MessageBox.Show("CSV file not found: " + csvFilePath);
                 return;
             }
 
-            var lines = File.ReadAllLines(csvFilePath);
-            if (lines.Length <= 1)
-                return;
-
-            for (int i = 1; i < lines.Length; i++)
+            try
             {
-                var fields = ParseCsvLine(lines[i]);
-                if (fields.Length >= 4)
+                var lines = File.ReadAllLines(csvFilePath);
+                if (lines.Length <= 1)
+                    return;
+
+                for (int i = 1; i < lines.Length; i++)
                 {
-                    PersonRecord record = new PersonRecord
+                    var fields = ParseCsvLine(lines[i]);
+                    if (fields.Length >= 4)
                     {
-                        Name = fields[0].Trim(),
-                        Phone = fields[1].Trim(),
-                        Address = fields[2].Trim(),
-                        Profession = fields[3].Trim()
-                    };
-                    records.Add(record);
+                        PersonRecord record = new PersonRecord
+                        {
+                            Name = fields[0].Trim(),
+                            Phone = fields[1].Trim(),
+                            Address = fields[2].Trim(),
+                            Profession = fields[3].Trim()
+                        };
+                        records.Add(record);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading CSV file: " + ex.Message);
+            }
         }
-
-
 
         private string[] ParseCsvLine(string line)
         {
@@ -199,16 +197,17 @@ namespace CSV_Search
             fields.Add(field.ToString());
             return fields.ToArray();
         }
-
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
+            /*
             if (!isLabel3Clicked)
             {
                 MessageBox.Show("Click on כרטיס first!");
                 return;
             }
-
+            */
             string query = textBox1.Text.Trim();
             if (string.IsNullOrEmpty(query))
             {
@@ -243,7 +242,7 @@ namespace CSV_Search
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            const string prefix = "        "; // 5 spaces
+            const string prefix = "        "; 
 
             if (!textBox1.Text.StartsWith(prefix))
             {
@@ -251,44 +250,50 @@ namespace CSV_Search
                 textBox1.SelectionStart = prefix.Length;
             }
         }
-
-
         private void Label_Click(object sender, EventArgs e)
         {
             if (sender is System.Windows.Forms.Label clickedLabel)
             {
-                string fileName = $"{clickedLabel.Text}.csv"; // Label ka naam as file
+                string fileName = $"{clickedLabel.Text}.csv";
                 string directoryPath = Path.Combine(Application.StartupPath, "CSVFiles");
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
                 string filePath = Path.Combine(directoryPath, fileName);
 
                 if (File.Exists(filePath))
                 {
-                    csvFilePath = filePath; // Update global file path
+                    csvFilePath = filePath;
 
-                    // ✅ Pehle wala data remove karo
+                    // Reset UI elements
                     records.Clear();
                     textBox1.Clear();
                     textBox2.Clear();
-                    LoadCsvData();  
+
+                    // Load the new CSV data
+                    LoadCsvData();
+
+                    // Update label styling
                     foreach (Control control in this.Controls)
                     {
                         if (control is System.Windows.Forms.Label lbl)
                         {
-                            lbl.ForeColor = Color.Black; // Default color
+                            lbl.ForeColor = Color.Black;
                         }
                     }
 
-                    // ✅ Clicked label ko highlight karo
+                    // Highlight the selected label
                     clickedLabel.ForeColor = ColorTranslator.FromHtml("#0066CC");
                 }
                 else
                 {
-                    MessageBox.Show($"File not found: {fileName}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"File not found: {fileName}\nLooking for file at: {filePath}",
+                                   "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-
-
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -308,8 +313,8 @@ namespace CSV_Search
 
         private void label3_Click(object sender, EventArgs e)
         {
-            isLabel3Clicked = true; // Mark label3 as clicked
-            label3.ForeColor = ColorTranslator.FromHtml("#0066CC"); // Change color to #0066CC
+            
+            label3.ForeColor = ColorTranslator.FromHtml("#0066CC"); 
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

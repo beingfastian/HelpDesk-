@@ -9,3 +9,14 @@ C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.csproj.Cor
 C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.exe
 C:\Users\DELL\source\repos\CSV Search\CSV Search\obj\Debug\CSV Search.pdb
 C:\Users\DELL\source\repos\CSV Search\CSV Search\bin\Debug\data.csv.csv.csv
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\bin\Debug\data.csv.csv.csv
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\bin\Debug\CSV Search.exe.config
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\bin\Debug\CSV Search.exe
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\bin\Debug\CSV Search.pdb
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\obj\Debug\CSV Search.csproj.AssemblyReference.cache
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\obj\Debug\CSV_Search.Form1.resources
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\obj\Debug\CSV_Search.Properties.Resources.resources
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\obj\Debug\CSV Search.csproj.GenerateResource.cache
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\obj\Debug\CSV Search.csproj.CoreCompileInputs.cache
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\obj\Debug\CSV Search.exe
+C:\Users\Hanzla Iqbal\Source\Repos\HelpDesk-\CSV Search\obj\Debug\CSV Search.pdb
